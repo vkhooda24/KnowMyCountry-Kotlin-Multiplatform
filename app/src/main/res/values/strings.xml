@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Know your Country</string>
+    <string name="countries_list_heading">%s Region , Countries- %d</string>
+    <string name="capital">Capital : %s</string>
+    <string name="native_name">Native Name : %s</string>
+    <string name="domain_name">Domain Name : %s</string>
+    <string name="region_name">Region Name : %s</string>
+    <string name="sub_region_name">Sub Region Name : %s</string>
+    <string name="timezone">Timezone : %s</string>
+    <string name="population">Population : %s</string>
+    <string name="alpha_code_name">Alpha code : %s</string>
+    <string name="americas_region_countries">Americas Region countries</string>
+    <string name="asia_region_countries">Asia Region countries</string>
+    <string name="oceania_region_countries">Oceania Region countries</string>
+    <string name="africa_region_countries">Africa Region countries</string>
+    <string name="europe_region_countries">Europe Region countries</string>
+    <string name="all_countries">All countries</string>
+</resources>
