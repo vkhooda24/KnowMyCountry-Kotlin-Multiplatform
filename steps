@@ -1,0 +1,161 @@
+
+Added into app build.gradle
+implementation project(':shared')
+
+Enable MPP:
+The feature "multi platform project" is experimental and should enable explicitly.
+
+Errors:
+======================================================================================
+1
+1: unable to resolve class org.jetbrains.kotlin.gradle.tasks.FatFrameworkTask
+ @ line 1, column 1.
+ import org.jetbrains.kotlin.gradle.tasks.FatFrameworkTask
+ ^
+1 error
+
+Fix path: Update kotlin and gradle version to latest.
+-------------
+updating gradle and kotlin plugins version
+classpath 'com.android.tools.build:gradle:3.2.1' old 3.2.1,new 3.5.2
+classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.11" old 1.3.11, new 1.3.50
+======================================================================================
+
+
+SYNC now, another ERROR:
+
+======================================================================================
+For 3.5.2 gradle plugin, need min gradle version 5.4.1
+CONFIGURE FAILED in 40s
+Minimum supported Gradle version is 5.4.1. Current version is 4.6.
+
+Fix: update distributionUrl=https\://services.gradle.org/distributions/gradle-4.6-all.zip in gradle-wrapper.properties, update to the latest version, current: 5.6.4
+-------------
+======================================================================================
+
+ERROR:
+======================================================================================
+Error: if you have apply plugin: 'kotlin-android-extensions' into mpp build gradle file, you will get below exception:
+A problem occurred configuring project ':shared'.
+> compileSdkVersion is not specified.
+Fix: remove apply plugin: 'com.android.application' and add if missing apply plugin: 'com.android.library'.
+======================================================================================
+
+ERROR:
+======================================================================================
+Reason: If you remove apply plugin: 'com.android.application' from mpp build.gradle since applicationid is set in default config
+ERROR: Library projects cannot set applicationId. applicationId is set to 'com.vkhoo24' in default config.
+Affected Modules: shared
+
+Fix: remove applicationid from mpp build gradle file.
+-------------
+======================================================================================
+
+
+ERROR:
+
+======================================================================================
+Reason: since you created java lib module, so you didn't have manifest file.
+error: Cannot read packageName from ~/MPP/shared/src/main/AndroidManifest.xml
+Affected Modules: shared
+
+Fix: copy app's manifest file with empty body i.e <manifest package="com.vkhooda24.knowyourcountry"></manifest> and use plugin apply plugin: 'com.android.library' instead 'com.android.application'
+-------------
+======================================================================================
+
+
+ERROR:
+
+======================================================================================
+Reason: Missing preset for ios/android
+
+* What went wrong:
+A problem occurred evaluating project ':shared'.
+> Could not create an instance of type org.jetbrains.kotlin.gradle.plugin.KotlinTarget.
+   > Could not generate a decorated class for interface org.jetbrains.kotlin.gradle.plugin.KotlinTarget.
+      > Cannot have abstract method KotlinTarget.getApiElementsConfigurationName().
+
+Fix: Find all occurrence of preset carefully and remove if not needed. resolve one by one for each preset
+-------------
+======================================================================================
+
+ERROR:
+
+======================================================================================
+Reason: ios Native libraries source not found
+
+Execution failed for task ':shared:linkDebugFrameworkIosX64'.
+> Could not resolve all files for configuration ':shared:iosX64CompileKlibraries'.
+   > Could not find org.jetbrains.kotlinx:kotlinx-coroutines-core:source set coroutines_version.
+     Searched in the following locations:
+       - https://dl.google.com/dl/android/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core/source set coroutines_version/kotlinx-coroutines-core-source set coroutines_version.pom
+       - https://dl.google.com/dl/android/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core/source set coroutines_version/kotlinx-coroutines-core-source set coroutines_version.jar
+       - https://jcenter.bintray.com/org/jetbrains/kotlinx/kotlinx-coroutines-core/source set coroutines_version/kotlinx-coroutines-core-source set coroutines_version.pom
+       - https://jcenter.bintray.com/org/jetbrains/kotlinx/kotlinx-coroutines-core/source set coroutines_version/kotlinx-coroutines-core-source set coroutines_version.jar
+     Required by:
+         project :shared
+
+Fix: check library version. hardcode the reference instead of variable.
+-------------
+======================================================================================
+
+ERROR:
+
+======================================================================================
+Reason: ios Native libraries source not found
+
+error: kotlinx-serializer unresolved reference
+
+Fix: check dependencies for all modules does it exist or not
+e.g missing implementation "io.ktor:ktor-client-serialization-jvm:$ktor_version" for androidMain
+-------------
+======================================================================================
+
+
+ERROR:
+
+======================================================================================
+
+Compilation failed: Key value-parameter name: kotlin.String? = ... defined in com.vkhooda24.knowyourcountry.model.Country.<init>[ValueParameterDescriptorImpl@2ff7a73] is missing in the map.
+
+ * Source files: ServiceLocator.kt, CountriesApi.kt, Dispatcher.kt, GetCountriesList.kt, UseCase.kt, Either.kt, expected.kt, Countries.kt, Country.kt, CountryDetail.kt, Languages.kt, BasePresenter.kt, CountriesListPresenter.kt, HttpClientEngine.kt, defaultDispatcher.kt, plate.kt
+ * Compiler version info: Konan: 1.3.50 / Kotlin: 1.3.50
+ * Output kind: FRAMEWORK
+
+e: java.util.NoSuchElementException: Key value-parameter name: kotlin.String? = ... defined in com.vkhooda24.knowyourcountry.model.Country.<init>[ValueParameterDescriptorImpl@2ff7a73] is missing in the map.
+	at kotlin.collections.MapsKt__MapWithDefaultKt.getOrImplicitDefaultNullable(MapWithDefault.kt:24)
+	at kotlin.collections.MapsKt__MapsKt.getValue(Maps.kt:294)
+	at org.jetbrains.kotlinx.serialization.compiler.backend.ir.IrBuilderExtension$buildInitializersRemapping$1.invoke(GeneratorHelpers.kt:428)
+
+Fix: Issue with serialization library so use data class instead open class(do not extend data class from open class) and use in data class below lines:
+@Serializer(forClass = Country::class)
+    object CountrySerializer : KSerializer<Country> {}
+    Fix help link: https://youtrack.jetbrains.com/issue/KT-32475
+
+    If want to make open class, then need to pass default value from child classes into super class call
+-------------
+======================================================================================
+
+ERROR:
+
+======================================================================================
+
+[IR VALIDATION] BEFORE Compiler Phase @IrLowering: org.jetbrains.kotlin.ir.declarations.impl.IrVariableImpl@35590829 for val tmp0_serialDesc: kotlinx.serialization.internal.SerialClassDescImpl defined in com.vkhooda24.knowyourcountry.model.Countries.`$serializer`[IrTemporaryVariableDescriptorImpl@3222ab2a] has unexpected parent org.jetbrains.kotlin.ir.declarations.impl.IrClassImpl@1dae9b9d
+w: [IR VALIDATION] AFTER Compiler Phase @IrLowering: org.jetbrains.kotlin.ir.declarations.impl.IrVariableImpl@35590829 for val tmp0_serialDesc: kotlinx.serialization.internal.SerialClassDescImpl defined in com.vkhooda24.knowyourcountry.model.Countries.`$serializer`[IrTemporaryVariableDescriptorImpl@3222ab2a] has unexpected parent org.jetbrains.kotlin.ir.declarations.impl.IrClassImpl@1dae9b9d
+w: [IR VALIDATION] AFTER Compiler Phase @IrLowering: org.jetbrains.kotlin.ir.declarations.impl.IrVariableImpl@fe54627 for var tmp0: kotlin.native.internal.NativePtr defined in io.ktor.client.engine.ios.IosClientEngine.<no name provided>_3.<init>[IrTemporaryVariableDescriptorImpl@760420ba] has unexpected parent org.jetbrains.kotlin.ir.declarations.impl.IrConstructorImpl@1638733c
+w: /Users/vhooda/vkhooda_directory/codespace_kotlin/KnowyourCountry-MPP/shared/src/commonMain/kotlin/com/vkhooda24/client/CountriesApi.kt: (33, 21): This declaration is experimental and its usage should be marked with '@kotlinx.serialization.UnstableDefault' or '@UseExperimental(kotlinx.serialization.UnstableDefault::class)'
+w: /Users/vhooda/vkhooda_directory/codespace_kotlin/KnowyourCountry-MPP/shared/src/commonMain/kotlin/com/vkhooda24/model/Country.kt: (12, 25): [IR VALIDATION] Duplicate IR node
+CONST Null type=kotlin.Nothing? value=null
+w: /Users/vhooda/vkhooda_directory/codespace_kotlin/KnowyourCountry-MPP/shared/src/commonMain/kotlin/com/vkhooda24/model/Country.kt: (14, 31): [IR VALIDATION] Duplicate IR node
+CONST Null type=kotlin.Nothing? value=null
+w: /Users/vhooda/vkhooda_directory/codespace_kotlin/KnowyourCountry-MPP/shared/src/commonMain/kotlin/com/vkhooda24/model/Country.kt: (16, 25): [IR VALIDATION] Duplicate IR node
+CONST Null type=kotlin.Nothing? value=null
+
+
+Fix: Removed initialization with null from data class constructor variable like var name: String? = null, remove null
+-------------
+======================================================================================
+
+
+
+MPP project built successfully.

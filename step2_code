@@ -1,0 +1,37 @@
+Enable MPP:
+The feature "multi platform project" is experimental and should enable explicitly.
+
+#1. Delete all directory under src directory from mpp module.
+#2. Add commonMain and androidMain, iOSMain under src directory
+
+
+Error:
+Expected function 'abcxyz()' has no actual declaration in module
+Fix: create folder and set sourceset in mpp gradle file.
+
+If directory srcroot not updating in project structure, sync build file with any commented line
+
+
+Error: iOS external libraries like ktor-client-core-native no api reference found
+Error: KotlinxSerializer reference not found.\
+Fix:
+Add in setting.gradle file for iOS native libraries support:
+pluginManagement {
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "kotlin-multiplatform") {
+                useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:${requested.version}")
+            }
+            if (requested.id.id == "kotlinx-serialization") {
+                useModule("org.jetbrains.kotlin:kotlin-serialization:${requested.version}")
+            }
+        }
+    }
+}
+
+enableFeaturePreview("GRADLE_METADATA")
+
+
+Runtime exception:
+Module with the Main dispatcher is missing. Add dependency providing the Main dispatcher
+Fix:add implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_sversion" in mpp build gradle file
