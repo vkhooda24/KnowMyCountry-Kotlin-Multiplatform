@@ -1,92 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp">
+
+        <TextView
+            android:id="@+id/countryNameTextView"
+            style="@style/primaryText"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Country Name" />
+
+        <ImageView
+            android:id="@+id/countryFlagImageView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="20dp">
+            android:layout_height="50dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/countryNameTextView" />
 
-        <TextView android:id="@+id/countryNameTextView"
-                  style="@style/primaryText"
-                  tools:text="Country Name"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toRightOf="parent"
-                  android:layout_marginTop="10dp"
-                  android:gravity="center"/>
+        <TextView
+            android:id="@+id/countryCapitalTextView"
+            style="@style/primaryText"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/countryFlagImageView"
+            tools:text="Capital Name" />
 
-        <ImageView android:id="@+id/countryFlagImageView"
-                   android:layout_width="match_parent"
-                   android:layout_height="50dp"
-                   app:layout_constraintRight_toRightOf="parent"
-                   app:layout_constraintLeft_toLeftOf="parent"
-                   app:layout_constraintTop_toBottomOf="@id/countryNameTextView"/>
+        <TextView
+            android:id="@+id/countryNativeNameTextView"
+            style="@style/primaryText"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toTopOf="@id/countryTopLevelDomainTextView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/countryCapitalTextView"
+            tools:text="Native Name" />
 
-        <TextView android:id="@+id/countryCapitalTextView"
-                  style="@style/primaryText"
-                  tools:text="Capital Name"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintTop_toBottomOf="@id/countryFlagImageView"
-                  android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/countryTopLevelDomainTextView"
+            style="@style/primaryText"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toTopOf="@id/countryRegionTextView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/countryNativeNameTextView"
+            tools:text="Domain Name" />
 
-        <TextView android:id="@+id/countryNativeNameTextView"
-                  style="@style/primaryText"
-                  tools:text="Native Name"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintTop_toBottomOf="@id/countryCapitalTextView"
-                  app:layout_constraintBottom_toTopOf="@id/countryTopLevelDomainTextView"
-                  android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/countryRegionTextView"
+            style="@style/primaryText"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toTopOf="@id/countrySubRegionTextView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/countryTopLevelDomainTextView"
+            tools:text="Region Name" />
 
-        <TextView android:id="@+id/countryTopLevelDomainTextView"
-                  style="@style/primaryText"
-                  tools:text="Domain Name"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintTop_toBottomOf="@id/countryNativeNameTextView"
-                  app:layout_constraintBottom_toTopOf="@id/countryRegionTextView"
-                  android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/countrySubRegionTextView"
+            style="@style/primaryText"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toTopOf="@id/countryTimeZoneTextView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/countryRegionTextView"
+            tools:text="Sub Region Name" />
 
-        <TextView android:id="@+id/countryRegionTextView"
-                  style="@style/primaryText"
-                  tools:text="Region Name"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintTop_toBottomOf="@id/countryTopLevelDomainTextView"
-                  app:layout_constraintBottom_toTopOf="@id/countrySubRegionTextView"
-                  android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/countryTimeZoneTextView"
+            style="@style/primaryText"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toTopOf="@id/countryPopulationTextView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/countrySubRegionTextView"
+            tools:text="Timezone" />
 
-        <TextView android:id="@+id/countrySubRegionTextView"
-                  style="@style/primaryText"
-                  tools:text="Sub Region Name"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintTop_toBottomOf="@id/countryRegionTextView"
-                  app:layout_constraintBottom_toTopOf="@id/countryTimeZoneTextView"
-                  android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/countryPopulationTextView"
+            style="@style/primaryText"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/countryTimeZoneTextView"
+            tools:text="Population" />
 
-        <TextView android:id="@+id/countryTimeZoneTextView"
-                  style="@style/primaryText"
-                  tools:text="Timezone"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintTop_toBottomOf="@id/countrySubRegionTextView"
-                  app:layout_constraintBottom_toTopOf="@id/countryPopulationTextView"
-                  android:layout_marginTop="10dp"/>
-
-        <TextView android:id="@+id/countryPopulationTextView"
-                  style="@style/primaryText"
-                  tools:text="Population"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintTop_toBottomOf="@id/countryTimeZoneTextView"
-                  android:layout_marginTop="10dp"/>
-
-        <TextView android:id="@+id/countryAlphaNameTextView"
-                  style="@style/primaryText"
-                  tools:text="Alpha code name"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintTop_toBottomOf="@id/countryPopulationTextView"
-                  app:layout_constraintBottom_toBottomOf="parent"
-                  android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/countryAlphaNameTextView"
+            style="@style/primaryText"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/countryPopulationTextView"
+            tools:text="Alpha code name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
