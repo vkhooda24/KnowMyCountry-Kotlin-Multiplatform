@@ -9,7 +9,7 @@ import kotlin.coroutines.CoroutineContext
  * Created by Vikram Hooda on 2019-11-10.
  */
 open class CoroutineScopePresenter(
-    private val mainContext: CoroutineContext,     // TODO: Use Dispatchers.Main instead when it will be supported on iOS, uiUpdate: com.vkhooda24.service.UiUpdate){}, uiUpdate: com.vkhooda24.service.UiUpdate){}
+    private val mainContext: CoroutineContext,     // TODO: Use Dispatchers.Main instead when it will be supported on iOS, uiCallback: com.vkhooda24.service.uiCallback){}, uiCallback: com.vkhooda24.service.uiCallback){}
     private val baseView: BaseView
 ) : CoroutineScope {
 
@@ -21,6 +21,7 @@ open class CoroutineScopePresenter(
     override val coroutineContext: CoroutineContext
         get() = mainContext + job + exceptionHandler
 
+    //Cancel coroutine job from Activity onDestroy() method
     open fun onDestroy() {
         job.cancel()
     }

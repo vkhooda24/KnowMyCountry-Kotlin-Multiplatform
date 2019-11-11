@@ -9,7 +9,7 @@ import com.vkhooda24.knowyourcountry.R
 import com.vkhooda24.knowyourcountry.app.AppConstants
 import com.vkhooda24.knowyourcountry.constants.IntentKeys
 import com.vkhooda24.knowyourcountry.model.Country
-import com.vkhooda24.service.UiUpdate
+import com.vkhooda24.service.UICallback
 import com.vkhooda24.utils.StringUtil
 import kotlinx.android.synthetic.main.activity_country_detail.*
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +18,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 /**
  * Created by Vikram Hooda on 12/24/18.
  */
-class CountryDetailActivity : Activity(), UiUpdate {
+class CountryDetailActivity : Activity(), UICallback {
     override fun showError(error: Throwable) {
         Log.e("CountryDetailActivity", error.message)
     }
