@@ -60,6 +60,8 @@ kotlin {
 
             implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
 
+            implementation "io.ktor:ktor-client-logging:$ktor_version"
+
             implementation "io.ktor:ktor-client-core:$ktor_version"
             implementation "io.ktor:ktor-client-json:$ktor_version"
         }
@@ -75,6 +77,8 @@ kotlin {
 
             implementation "io.ktor:ktor-client-okhttp:$ktor_version"
             implementation "com.squareup.okhttp3:logging-interceptor:3.14.1"
+
+            implementation "io.ktor:ktor-client-logging-jvm:$ktor_version"
 
             implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
             implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
@@ -96,6 +100,9 @@ kotlin {
             implementation "io.ktor:ktor-client-ios:$ktor_version"
             implementation "io.ktor:ktor-client-json-native:$ktor_version"
             implementation "io.ktor:ktor-client-serialization-iosx64:$ktor_version"
+
+            implementation "io.ktor:ktor-client-logging-native:$ktor_version"
+
 
             implementation "io.ktor:ktor-client-serialization-native:$ktor_version"
 

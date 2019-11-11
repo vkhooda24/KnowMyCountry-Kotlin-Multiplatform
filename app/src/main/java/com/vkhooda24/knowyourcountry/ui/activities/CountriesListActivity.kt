@@ -3,25 +3,34 @@ package com.vkhooda24.knowyourcountry.ui.activities
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.util.Log
+import com.vkhooda24.CountryPresenter
 import com.vkhooda24.knowyourcountry.R
 import com.vkhooda24.knowyourcountry.app.AppConstants
 import com.vkhooda24.knowyourcountry.constants.IntentKeys
 import com.vkhooda24.knowyourcountry.model.Country
 import com.vkhooda24.knowyourcountry.ui.adapter.CountriesRecyclerAdapter
-import com.vkhooda24.service.CountryListViewModel
+import com.vkhooda24.service.UiUpdate
 import kotlinx.android.synthetic.main.activity_countries_list.*
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.InternalCoroutinesApi
 
 /**
  * Created by Vikram Hooda on 12/22/18.
  */
-class CountriesListActivity : Activity() {
+class CountriesListActivity : Activity(), UiUpdate {
+    override fun showError(error: Throwable) {
+        Log.e("CountriesListActivity", error.message)
+    }
 
-    private val countryListViewModel: CountryListViewModel by lazy {
-        CountryListViewModel()
+    override fun countryListResponse(countryList: List<Country>) {
+
+//        runOnUiThread {
+        bindViewsData(countryList)
+//        }
+    }
+
+    override fun countryDetailResponse(country: Country) {
     }
 
     private val countriesRecyclerAdapter: CountriesRecyclerAdapter by lazy {
@@ -31,6 +40,7 @@ class CountriesListActivity : Activity() {
     //Nullable string i.e can assign null to this property
     private var regionName: String = AppConstants.REGION_ALL
 
+    @InternalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_countries_list)
@@ -39,10 +49,7 @@ class CountriesListActivity : Activity() {
         //safe call operator ?.
         regionName = intent?.extras?.getString(IntentKeys.REGION_NAME) ?: AppConstants.REGION_ALL
 
-        CoroutineScope(Dispatchers.Main).launch {
-            val countryList = countryListViewModel.getCountryList(regionName)
-            bindViewsData(countryList)
-        }
+        CountryPresenter(Dispatchers.Main, this).getCountryList(regionName)
     }
 
     private fun bindViewsData(countries: List<Country>) {

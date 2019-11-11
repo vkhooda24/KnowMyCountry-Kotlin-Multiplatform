@@ -156,6 +156,26 @@ Fix: Removed initialization with null from data class constructor variable like 
 -------------
 ======================================================================================
 
+ERROR:
+
+======================================================================================
+InvalidMutabilityException: mutation attempt of frozen <object> when using ktor in Kotlin Multiplatform (iOS)
+InvalidMutabilityException: mutation attempt of frozen kotlinx.atomicfu.AtomicRef
+
+https://github.com/Kotlin/kotlinx.coroutines/issues/462
+
+Fix:
+-------------
+======================================================================================
+
+ERROR:
+
+======================================================================================
+Issue: when runs the ios project, see error: Library not loaded:
+
+Fix: Add .framework to Library, binaries in project general settings.
+-------------
+======================================================================================
 
 
 MPP project built successfully.

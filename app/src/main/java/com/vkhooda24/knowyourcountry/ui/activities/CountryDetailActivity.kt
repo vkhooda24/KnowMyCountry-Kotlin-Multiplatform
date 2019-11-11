@@ -2,30 +2,37 @@ package com.vkhooda24.knowyourcountry.ui.activities
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import coil.api.load
+import com.vkhooda24.CountryPresenter
 import com.vkhooda24.knowyourcountry.R
 import com.vkhooda24.knowyourcountry.app.AppConstants
 import com.vkhooda24.knowyourcountry.constants.IntentKeys
 import com.vkhooda24.knowyourcountry.model.Country
-import com.vkhooda24.service.CountryListViewModel
+import com.vkhooda24.service.UiUpdate
 import com.vkhooda24.utils.StringUtil
 import kotlinx.android.synthetic.main.activity_country_detail.*
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.InternalCoroutinesApi
 
 /**
  * Created by Vikram Hooda on 12/24/18.
  */
-class CountryDetailActivity : Activity() {
+class CountryDetailActivity : Activity(), UiUpdate {
+    override fun showError(error: Throwable) {
+        Log.e("CountryDetailActivity", error.message)
+    }
 
+    override fun countryListResponse(countryList: List<Country>) {
+    }
 
-    private val countryDetail: CountryListViewModel by lazy {
-        CountryListViewModel()
+    override fun countryDetailResponse(countryDetail: Country) {
+        setCountryDetails(countryDetail)
     }
 
     private var countryName: String = AppConstants.DEFAULT_COUNTRY_NAME
 
+    @InternalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_country_detail)
@@ -33,10 +40,8 @@ class CountryDetailActivity : Activity() {
         countryName =
             intent?.extras?.getString(IntentKeys.COUNTRY_NAME) ?: AppConstants.DEFAULT_COUNTRY_NAME
 
-        CoroutineScope(Dispatchers.Main).launch {
-            val countryDetail = countryDetail.getCountryDetail(countryName)
-            setCountryDetails(countryDetail)
-        }
+
+        CountryPresenter(Dispatchers.Main, this).getCountryDetail(countryName)
     }
 
     private fun setCountryDetails(countryDetail: Country) {

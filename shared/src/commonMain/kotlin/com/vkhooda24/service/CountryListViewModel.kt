@@ -1,32 +1,23 @@
 package com.vkhooda24.service
 
+import com.vkhooda24.BaseView
+import com.vkhooda24.CoroutineScopePresenter
 import com.vkhooda24.HttpClientEngine
-import com.vkhooda24.domain.defaultDispatcher
+import com.vkhooda24.domain.uiDispatcher
+import com.vkhooda24.knowyourcountry.model.Country
 import kotlinx.coroutines.CoroutineScope
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.launch
 
 /**
  * Created by Vikram Hooda on 2019-11-09.
  */
 
+interface UiUpdate : BaseView {
+    fun countryListResponse(countryList: List<Country>)
+    fun countryDetailResponse(countryDetail: Country)
+}
+
 class CountryListViewModel {
 
-    //Dispatcher
-    private val coroutineContext: CoroutineContext = defaultDispatcher
-
-    //Service call
-    private val service by lazy {
-        CountryService(HttpClientEngine.httpClientEngine)
-    }
-
-    //Coroutine Scope
-    private val scope: CoroutineScope by lazy {
-        CoroutineScope(coroutineContext)
-    }
-
-    // Fetch countries list
-    suspend fun getCountryList(regionName: String) = service.getCountriesList(regionName)
-
-    //Fetch country detail
-    suspend fun getCountryDetail(countryName: String) = service.getCountryDetail(countryName).get(0)
 }
+
