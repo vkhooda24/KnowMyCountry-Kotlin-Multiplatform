@@ -16,34 +16,14 @@ class CountryPresenter(
     // Fetch countries list
     fun getCountryList(regionName: String) = launch {
         uiCallback.countryListResponse(
-            CountryService(HttpClientEngine.httpClientEngine).getCountriesList(
-                regionName
-            )
+            CountryService().getCountriesList(regionName)
         )
     }
 
     //Fetch country detail
     fun getCountryDetail(countryName: String) = launch {
         uiCallback.countryDetailResponse(
-            CountryService(HttpClientEngine.httpClientEngine).getCountryDetail(
-                countryName
-            ).get(0)
-        )
-    }
-
-    fun getCountryListFromJson(regionName: String) = launch {
-        uiCallback.countryListResponse(
-            CountryService(HttpClientEngine.httpClientEngine).getCountriesListFromJson(
-                regionName
-            )
-        )
-    }
-
-    fun getCountryDetailFromJson(countryName: String) = launch {
-        uiCallback.countryDetailResponse(
-            CountryService(HttpClientEngine.httpClientEngine).getCountryDetailFromJson(
-                countryName
-            ).get(0)
+            CountryService().getCountryDetail(countryName)[0]
         )
     }
 }
