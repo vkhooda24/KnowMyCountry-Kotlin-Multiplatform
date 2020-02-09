@@ -12,17 +12,18 @@ import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
-import io.ktor.client.response.HttpResponse
-import io.ktor.client.response.readText
+import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.readText
 import io.ktor.http.URLProtocol
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.list
+import kotlin.native.concurrent.ThreadLocal
 
 /**
  * Created by Vikram Hooda on 2019-11-09.
  */
-class CountryService(httpClientEngine: HttpClientEngine) {
+class CountryService(private val httpClientEngine: HttpClientEngine) {
 
     companion object {
         const val HOST_URL = "restcountries.eu/rest/v2"
@@ -30,7 +31,8 @@ class CountryService(httpClientEngine: HttpClientEngine) {
     }
 
     //create http client engine
-    private val httpClient = HttpClient(httpClientEngine) {
+    @ThreadLocal
+    private var httpClient = HttpClient() {
         install(JsonFeature) {
             serializer = KotlinxSerializer().apply {
                 setMapper(CountryList::class, CountryList.serializer())
@@ -46,7 +48,7 @@ class CountryService(httpClientEngine: HttpClientEngine) {
 
     suspend fun getCountriesList(regionName: String = "all"): List<Country> {
 
-        val response = httpClient.get<HttpResponse> {
+        val response = HttpClient().get<HttpResponse> {
             val region = when (regionName.toLowerCase()) {
                 REGION_ALL -> "all"
                 else -> "region/$regionName"
@@ -58,8 +60,7 @@ class CountryService(httpClientEngine: HttpClientEngine) {
     }
 
     suspend fun getCountryDetail(countryName: String = "United States"): List<Country> {
-        val response = httpClient.get<HttpResponse>
-        {
+        val response = HttpClient().get<HttpResponse> {
             val countryN = "name/$countryName?fullText=true"
             apiUrl(countryN)
         }

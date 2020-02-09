@@ -20,6 +20,7 @@ open class CoroutineScopePresenter(
 
     override val coroutineContext: CoroutineContext
         get() = mainContext + job + exceptionHandler
+//        get() = Dispatchers.Main
 
     //Cancel coroutine job from Activity onDestroy() method
     open fun onDestroy() {

@@ -163,8 +163,10 @@ InvalidMutabilityException: mutation attempt of frozen <object> when using ktor 
 InvalidMutabilityException: mutation attempt of frozen kotlinx.atomicfu.AtomicRef
 
 https://github.com/Kotlin/kotlinx.coroutines/issues/462
-
-Fix:
+https://github.com/ktorio/ktor/issues/1538
+https://github.com/ktorio/ktor/issues/1543
+Fix: Issue was with httpClient engine which is static member and passing in HTTPClient object in service class causing this issue.
+This is Ktor library issue and issue already opened https://github.com/ktorio/ktor/issues/1543
 -------------
 ======================================================================================
 
