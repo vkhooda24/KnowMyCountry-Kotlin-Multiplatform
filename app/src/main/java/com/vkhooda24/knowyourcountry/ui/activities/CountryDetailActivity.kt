@@ -19,16 +19,6 @@ import kotlinx.coroutines.InternalCoroutinesApi
  * Created by Vikram Hooda on 12/24/18.
  */
 class CountryDetailActivity : Activity(), UICallback {
-    override fun showError(error: Throwable) {
-        Log.e("CountryDetailActivity", error.message)
-    }
-
-    override fun countryListResponse(countryList: List<Country>) {
-    }
-
-    override fun countryDetailResponse(countryDetail: Country) {
-        setCountryDetails(countryDetail)
-    }
 
     private var countryName: String = AppConstants.DEFAULT_COUNTRY_NAME
 
@@ -65,5 +55,16 @@ class CountryDetailActivity : Activity(), UICallback {
             getString(R.string.alpha_code_name, countryDetail.alpha3Code)
 
         countryFlagImageView.load(countryDetail.flag)
+    }
+
+    override fun showError(error: Throwable) {
+        Log.e("CountryDetailActivity", error.message)
+    }
+
+    override fun countryListResponse(countryList: List<Country>) {
+    }
+
+    override fun countryDetailResponse(countryDetail: Country) {
+        setCountryDetails(countryDetail)
     }
 }
