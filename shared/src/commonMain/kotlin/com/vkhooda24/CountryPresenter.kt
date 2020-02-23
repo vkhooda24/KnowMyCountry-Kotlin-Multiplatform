@@ -16,14 +16,14 @@ class CountryPresenter(
     // Fetch countries list
     fun getCountryList(regionName: String) = launch {
         uiCallback.countryListResponse(
-            CountryService().getCountriesList(regionName)
+            CountryService(HttpClientEngine.httpClientEngine).getCountriesList(regionName)
         )
     }
 
     //Fetch country detail
     fun getCountryDetail(countryName: String) = launch {
         uiCallback.countryDetailResponse(
-            CountryService().getCountryDetail(countryName)[0]
+            CountryService(HttpClientEngine.httpClientEngine).getCountryDetail(countryName)[0]
         )
     }
 }

@@ -179,5 +179,7 @@ Fix: Add .framework to Library, binaries in project general settings.
 -------------
 ======================================================================================
 
+ERROR:
+Caused by: java.lang.IllegalStateException: Failed to find HTTP client engine implementation in the classpath: consider adding client engine dependency. See https://ktor.io/clients/http-client/engines.html
 
 MPP project built successfully.
