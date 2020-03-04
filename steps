@@ -161,6 +161,7 @@ ERROR:
 ======================================================================================
 InvalidMutabilityException: mutation attempt of frozen <object> when using ktor in Kotlin Multiplatform (iOS)
 InvalidMutabilityException: mutation attempt of frozen kotlinx.atomicfu.AtomicRef
+kotlin.native.concurrent.InvalidMutabilityException: mutation attempt of frozen kotlinx.coroutines
 
 https://github.com/Kotlin/kotlinx.coroutines/issues/462
 https://github.com/ktorio/ktor/issues/1538
@@ -179,5 +180,7 @@ Fix: Add .framework to Library, binaries in project general settings.
 -------------
 ======================================================================================
 
+ERROR:
+Caused by: java.lang.IllegalStateException: Failed to find HTTP client engine implementation in the classpath: consider adding client engine dependency. See https://ktor.io/clients/http-client/engines.html
 
 MPP project built successfully.

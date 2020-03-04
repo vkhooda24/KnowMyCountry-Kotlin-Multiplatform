@@ -2,12 +2,16 @@ package com.vkhooda24.knowyourcountry.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.vkhooda24.knowyourcountry.R
 import com.vkhooda24.knowyourcountry.constants.IntentKeys
+import com.vkhooda24.utils.*
 import kotlinx.android.synthetic.main.activity_welcome.*
 
+/**
+ * Created by Vikram Hooda on 03/01/2020
+ */
 class WelcomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,29 +19,29 @@ class WelcomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_welcome)
 
         allCountriesButton.setOnClickListener {
-            launchCountriesListActivity("All")
+            launchCountriesListActivity(ALL)
         }
 
         asiaRegionCountriesButton.setOnClickListener {
-            launchCountriesListActivity("Asia")
+            launchCountriesListActivity(ASIA)
         }
 
         americasRegionCountriesButton.setOnClickListener {
-            launchCountriesListActivity("Americas")
+            launchCountriesListActivity(AMERICAS)
         }
 
         europeRegionCountriesButton.setOnClickListener {
-            launchCountriesListActivity("Europe")
+            launchCountriesListActivity(EUROPE)
         }
 
         africaRegionCountriesButton.setOnClickListener {
-            launchCountriesListActivity("Africa")
+            launchCountriesListActivity(AFRICA)
         }
 
         //Object expression
         oceaniaRegionCountriesButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                launchCountriesListActivity("Oceania")
+                launchCountriesListActivity(OCEANIA)
             }
         })
     }

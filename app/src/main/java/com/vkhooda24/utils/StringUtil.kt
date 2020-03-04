@@ -7,12 +7,9 @@ object StringUtil {
 
     fun formatNumberWithCommas(number: String): String {
         return try {
-            //            NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
-            //            return numberFormat.format(number);
             String.format("%,d", Integer.valueOf(number))
         } catch (e: Exception) {
             number
         }
-
     }
 }

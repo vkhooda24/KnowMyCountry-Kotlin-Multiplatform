@@ -19,33 +19,33 @@ data class Country(
 
     var numericCode: String?,
 
-    var callingCodes: Array<String>?,
+    var callingCodes: MutableList<String>?,
 
     var alpha3Code: String?,
 
-    var topLevelDomain: Array<String>?,
+    var topLevelDomain: MutableList<String>?,
 
     var alpha2Code: String?,
 
     var capital: String?,
 
-    var altSpellings: Array<String>?,
+    var altSpellings: MutableList<String>?,
 
     var subregion: String?,
 
-    var timezones: Array<String>?,
+    var timezones: MutableList<String>?,
 
     var flag: String?,
 
     var area: String?,
 
-    var latlng: Array<String>?,
+    var latlng: MutableList<String>?,
 
     var demonym: String?,
 
     var gini: String?,
 
-    var borders: Array<String>?,
+    var borders: MutableList<String>?,
 
     var population: String?
 ) {
