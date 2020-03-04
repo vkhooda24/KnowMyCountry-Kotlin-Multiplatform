@@ -14,8 +14,13 @@ class CountriesListPresenter(
 ) : CoroutineScopePresenter(context, countriesListResponseListener) {
     // Fetch countries list
     fun fetchCountiesList(regionName: String) = launch {
-        countriesListResponseListener.countriesListResponse(
+
+        val countriesList =
             CountryService(HttpClientEngine.httpClientEngine).getCountriesList(regionName)
-        )
+
+        val sortedByDescending = countriesList.sortedByDescending { country -> country.name }
+
+        countriesListResponseListener.countriesListResponse(sortedByDescending)
     }
 }
+//val sortedByDescending = countriesList.sortedByDescending { country -> country.name }
