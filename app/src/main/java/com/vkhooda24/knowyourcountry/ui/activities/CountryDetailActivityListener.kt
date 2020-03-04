@@ -17,7 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.InternalCoroutinesApi
 
 /**
- * Created by Vikram Hooda on 12/24/18.
+ * Created by Vikram Hooda on 03/01/2020
  */
 class CountryDetailActivity : Activity(), CountryDetailsResponseListener {
 
