@@ -4,12 +4,13 @@ import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import coil.api.load
-import com.vkhooda24.CountryPresenter
+import com.vkhooda24.CountriesListPresenter
+import com.vkhooda24.CountryDetailsPresenter
 import com.vkhooda24.knowyourcountry.R
 import com.vkhooda24.knowyourcountry.app.AppConstants
 import com.vkhooda24.knowyourcountry.constants.IntentKeys
 import com.vkhooda24.knowyourcountry.model.Country
-import com.vkhooda24.service.UICallback
+import com.vkhooda24.service.CountryDetailsResponseListener
 import com.vkhooda24.utils.StringUtil
 import kotlinx.android.synthetic.main.activity_country_detail.*
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +19,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 /**
  * Created by Vikram Hooda on 12/24/18.
  */
-class CountryDetailActivity : Activity(), UICallback {
+class CountryDetailActivity : Activity(), CountryDetailsResponseListener {
 
     private var countryName: String = AppConstants.DEFAULT_COUNTRY_NAME
 
@@ -30,8 +31,7 @@ class CountryDetailActivity : Activity(), UICallback {
         countryName =
             intent?.extras?.getString(IntentKeys.COUNTRY_NAME) ?: AppConstants.DEFAULT_COUNTRY_NAME
 
-
-        CountryPresenter(Dispatchers.Main, this).getCountryDetail(countryName)
+        CountryDetailsPresenter(Dispatchers.Main, this).fetchCountryDetails(countryName)
     }
 
     private fun setCountryDetails(countryDetail: Country) {
@@ -57,14 +57,11 @@ class CountryDetailActivity : Activity(), UICallback {
         countryFlagImageView.load(countryDetail.flag)
     }
 
-    override fun showError(error: Throwable) {
-        Log.e("CountryDetailActivity", error.message)
-    }
-
-    override fun countryListResponse(countryList: List<Country>) {
-    }
-
     override fun countryDetailResponse(countryDetail: Country) {
         setCountryDetails(countryDetail)
+    }
+
+    override fun showError(error: Throwable) {
+        Log.e("CountryDetailActivity", error.message)
     }
 }

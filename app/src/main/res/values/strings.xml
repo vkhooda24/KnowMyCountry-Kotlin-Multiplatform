@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Know your Country</string>
-    <string name="countries_list_heading">%s Region , Countries- %d</string>
+    <string name="countries_list_heading">%s Region , Countries - </string>
+    <string name="countries_list_count_heading">%s Region , Countries- %d</string>
     <string name="capital">Capital : %s</string>
     <string name="native_name">Native Name : %s</string>
     <string name="domain_name">Domain Name : %s</string>

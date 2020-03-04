@@ -161,6 +161,7 @@ ERROR:
 ======================================================================================
 InvalidMutabilityException: mutation attempt of frozen <object> when using ktor in Kotlin Multiplatform (iOS)
 InvalidMutabilityException: mutation attempt of frozen kotlinx.atomicfu.AtomicRef
+kotlin.native.concurrent.InvalidMutabilityException: mutation attempt of frozen kotlinx.coroutines
 
 https://github.com/Kotlin/kotlinx.coroutines/issues/462
 https://github.com/ktorio/ktor/issues/1538

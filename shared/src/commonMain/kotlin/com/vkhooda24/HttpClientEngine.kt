@@ -6,6 +6,5 @@ import kotlin.native.concurrent.ThreadLocal
 
 expect object HttpClientEngine {
 
-    @SharedImmutable
-    val httpClientEngine: HttpClientEngine
+    val httpClientEngine: HttpClientEngine?
 }
