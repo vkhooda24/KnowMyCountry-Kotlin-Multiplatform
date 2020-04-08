@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.vkhooda24.knowyourcountry.R
 import com.vkhooda24.knowyourcountry.constants.IntentKeys
+import com.vkhooda24.platformName
 import com.vkhooda24.utils.*
 import kotlinx.android.synthetic.main.activity_welcome.*
 
@@ -17,6 +18,8 @@ class WelcomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
+
+        plateformName.text = platformName
 
         allCountriesButton.setOnClickListener {
             launchCountriesListActivity(ALL)

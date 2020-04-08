@@ -10,10 +10,10 @@
     <string name="timezone">Timezone : %s</string>
     <string name="population">Population : %s</string>
     <string name="alpha_code_name">Alpha code : %s</string>
-    <string name="americas_region_countries">Americas Region countries</string>
-    <string name="asia_region_countries">Asia Region countries</string>
-    <string name="oceania_region_countries">Oceania Region countries</string>
-    <string name="africa_region_countries">Africa Region countries</string>
-    <string name="europe_region_countries">Europe Region countries</string>
+    <string name="americas_region_countries">Americas region countries</string>
+    <string name="asia_region_countries">Asia region countries</string>
+    <string name="oceania_region_countries">Oceania region countries</string>
+    <string name="africa_region_countries">Africa region countries</string>
+    <string name="europe_region_countries">Europe region countries</string>
     <string name="all_countries">All countries</string>
 </resources>

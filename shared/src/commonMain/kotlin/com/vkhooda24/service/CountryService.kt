@@ -2,7 +2,6 @@ package com.vkhooda24.service
 
 import com.vkhooda24.knowyourcountry.model.Country
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
@@ -12,18 +11,19 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.list
 
 /**
- * Created by Vikram Hooda on 2019-11-09.
+ * Created by Vikram Hooda on 2020-03-07.
  */
-internal const val HOST_URL = "restcountries.eu/rest/v2"
-internal const val REGION = "region"
-internal const val REGION_ALL = "all"
+private const val HOST_URL = "restcountries.eu/rest/v2"
+private const val REGION = "region"
+private const val REGION_ALL = "all"
 
 @UseExperimental(kotlinx.serialization.UnstableDefault::class)
-class CountryService(httpClientEngine: HttpClientEngine?) {
+class CountryService {
 
     private var httpClient: HttpClient? = null
+
     init {
-        httpClient = httpClientEngine?.let {
+        httpClient = com.vkhooda24.HttpClientEngine.httpClientEngine?.let {
             HttpClient(it)
         } ?: HttpClient()
     }
