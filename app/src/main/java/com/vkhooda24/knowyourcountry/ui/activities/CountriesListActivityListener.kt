@@ -1,12 +1,11 @@
 package com.vkhooda24.knowyourcountry.ui.activities
 
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.vkhooda24.CountriesListPresenter
+import com.vkhooda24.presenter.CountriesListPresenter
 import com.vkhooda24.knowyourcountry.R
 import com.vkhooda24.knowyourcountry.app.AppConstants
 import com.vkhooda24.knowyourcountry.constants.IntentKeys

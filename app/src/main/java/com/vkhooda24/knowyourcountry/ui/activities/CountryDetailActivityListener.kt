@@ -4,8 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import coil.api.load
-import com.vkhooda24.CountriesListPresenter
-import com.vkhooda24.CountryDetailsPresenter
+import com.vkhooda24.presenter.CountryDetailsPresenter
 import com.vkhooda24.knowyourcountry.R
 import com.vkhooda24.knowyourcountry.app.AppConstants
 import com.vkhooda24.knowyourcountry.constants.IntentKeys
@@ -17,7 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.InternalCoroutinesApi
 
 /**
- * Created by Vikram Hooda on 03/01/2020
+ * Created by Vikram Hooda on 2020-03-11
  */
 class CountryDetailActivity : Activity(), CountryDetailsResponseListener {
 
